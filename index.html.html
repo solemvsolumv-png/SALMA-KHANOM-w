@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سلمى خانم — مائدة أصيلة</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dark: #8B6914;
+    --cream: #FAF6EE;
+    --dark: #1A1208;
+    --dark2: #2D2010;
+    --spice: #8B2020;
+    --spice-light: #C43030;
+    --text: #3D2B0E;
+    --text-muted: #8A7050;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Amiri', serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    background: rgba(26, 18, 8, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+    transition: all 0.4s ease;
+  }
+
+  nav.scrolled {
+    height: 60px;
+    background: rgba(26, 18, 8, 0.97);
+    border-bottom-color: rgba(201, 168, 76, 0.45);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nav-logo span {
+    display: block;
+    font-size: 0.6rem;
+    color: var(--gold-light);
+    letter-spacing: 0.3em;
+    font-family: 'Cormorant Garamond', serif;
+    text-transform: uppercase;
+    margin-top: -2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Amiri', serif;
+    font-size: 1rem;
+    color: rgba(250, 246, 238, 0.75);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; right: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--dark) !important;
+    padding: 0.45rem 1.2rem !important;
+    border-radius: 2px;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em;
+    transition: background 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--dark) !important; }
+  .nav-cta::after { display: none !important; }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    background: var(--dark);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+    padding-top: 70px;
+  }
+
+  .hero-bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.04'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 3rem 5rem 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 30px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    opacity: 0.85;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(250,246,238,0.65);
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 0.85rem 2rem;
+    font-family: 'Amiri', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    letter-spacing: 0.05em;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(201,168,76,0.3);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    padding: 0.85rem 2rem;
+    font-family: 'Amiri', serif;
+    font-size: 1rem;
+    border: 1px solid rgba(250,246,238,0.3);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: rgba(250,246,238,0.5);
+    letter-spacing: 0.05em;
+  }
+
+  .hero-image-side {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7) saturate(1.2);
+    transition: transform 8s ease;
+  }
+
+  .hero-image-side:hover img {
+    transform: scale(1.04);
+  }
+
+  .hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--dark) 0%, transparent 40%);
+  }
+
+  /* ── MENU SECTION ── */
+  #menu {
+    padding: 6rem 2rem;
+    background: var(--cream);
+    position: relative;
+  }
+
+  #menu::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--dark);
+    line-height: 1.2;
+  }
+
+  .section-title em {
+    color: var(--spice);
+    font-style: italic;
+  }
+
+  .section-line {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), var(--gold-light));
+    margin: 1.2rem auto 0;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .menu-card {
+    background: white;
+    border: 1px solid rgba(201,168,76,0.15);
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+  }
+
+  .menu-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(26,18,8,0.12);
+    border-color: rgba(201,168,76,0.4);
+  }
+
+  .card-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    display: block;
+  }
+
+  .menu-card:hover .card-img {
+    transform: scale(1.05);
+  }
+
+  .card-body {
+    padding: 1.6rem;
+  }
+
+  .card-badge {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: var(--dark);
+    margin-bottom: 0.7rem;
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.4rem;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--spice);
+  }
+
+  .price span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-right: 3px;
+  }
+
+  .card-btn {
+    background: var(--dark);
+    color: var(--gold);
+    padding: 0.55rem 1.2rem;
+    font-family: 'Amiri', serif;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    letter-spacing: 0.05em;
+  }
+
+  .card-btn:hover {
+    background: var(--gold);
+    color: var(--dark);
+  }
+
+  /* custom box */
+  .custom-box {
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    background: var(--dark);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .custom-box::before {
+    content: '✦';
+    position: absolute;
+    top: -30px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 5rem;
+    color: rgba(201,168,76,0.06);
+    pointer-events: none;
+  }
+
+  .custom-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--cream);
+    margin-bottom: 0.7rem;
+  }
+
+  .custom-box p {
+    color: rgba(250,246,238,0.6);
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  .custom-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .form-row { display: flex; gap: 1rem; }
+
+  .guests-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 0.6rem 1rem;
+    flex: 1;
+  }
+
+  .guests-control button {
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 1.3rem;
+    cursor: pointer;
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    transition: color 0.2s;
+  }
+
+  .guests-control button:hover { color: var(--gold-light); }
+
+  .guests-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--cream);
+    min-width: 30px;
+    text-align: center;
+  }
+
+  .guests-label {
+    font-size: 0.85rem;
+    color: rgba(250,246,238,0.5);
+    margin-right: auto;
+  }
+
+  .pref-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+  }
+
+  .pref-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.15);
+    color: rgba(250,246,238,0.6);
+    padding: 0.5rem 0.4rem;
+    font-family: 'Amiri', serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .pref-btn.active, .pref-btn:hover {
+    background: rgba(201,168,76,0.15);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--dark2);
+    padding: 5rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--spice), var(--gold), transparent);
+  }
+
+  #contact .section-title { color: var(--cream); }
+
+  .contact-options {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 1.5rem 2rem;
+    min-width: 180px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: block;
+  }
+
+  .contact-card:hover {
+    background: rgba(201,168,76,0.1);
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .contact-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-value {
+    color: var(--cream);
+    font-size: 1rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .footer-copy {
+    font-size: 0.82rem;
+    color: rgba(250,246,238,0.35);
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  /* ── DECORATIVE ── */
+  .ornament {
+    color: var(--gold);
+    font-size: 1.2rem;
+    opacity: 0.5;
+    display: inline-block;
+    margin: 0 0.5rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content > * {
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-tag    { animation-delay: 0.1s; }
+  .hero-title  { animation-delay: 0.25s; }
+  .hero-arabic { animation-delay: 0.35s; }
+  .hero-desc   { animation-delay: 0.45s; }
+  .hero-btns   { animation-delay: 0.55s; }
+  .hero-stats  { animation-delay: 0.65s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    #home { grid-template-columns: 1fr; }
+    .hero-image-side { display: none; }
+    .hero-content { padding: 3rem 1.5rem; }
+    .custom-box { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .nav-links { display: none; }
+    .pref-grid { grid-template-columns: repeat(2,1fr); }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    SALMA KHANOM
+    <span>Authentic South Asian Feasts</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">الرئيسية</a></li>
+    <li><a href="#menu">القائمة</a></li>
+    <li><a href="#contact">تواصل معنا</a></li>
+    <li><a href="https://wa.me/962792249666" class="nav-cta">اطلب الآن</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="home">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-tag">سلمى خانم <span class="ornament">✦</span> منذ ٢٠١٨</div>
+    <h1 class="hero-title">
+      Authentic<br>
+      South Asian<br>
+      <em>Feasts.</em>
+    </h1>
+    <p class="hero-arabic">نقدّم لكم أشهى دولما على الإطلاق</p>
+    <p class="hero-desc">
+      وجبات جنوب آسيا الأصيلة — طُهيت بأيدٍ محترفة في دفء البيت،
+      ومقدّمة بقلب ودافئ إلى مائدتكم.
+    </p>
+    <div class="hero-btns">
+      <a href="https://wa.me/962792249666" class="btn-primary">اطلب عبر واتساب</a>
+      <a href="#menu" class="btn-outline">استكشف البكسات</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">+500</span>
+        <span class="stat-label">وليمة مُنجزة</span>
+      </div>
+      <div>
+        <span class="stat-num">100%</span>
+        <span class="stat-label">مكوّنات طبيعية</span>
+      </div>
+      <div>
+        <span class="stat-num">5★</span>
+        <span class="stat-label">تقييم العملاء</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-image-side">
+    <img src="https://salmas-feast-bloom.lovable.app/assets/hero-dolma-BUf-PEmn.jpg" alt="Dolma Feast">
+    <div class="hero-image-overlay"></div>
+  </div>
+</section>
+
+<!-- ══ MENU ══ -->
+<section id="menu">
+  <div class="section-header">
+    <span class="section-tag">✦ قائمتنا ✦</span>
+    <h2 class="section-title">بكسات الولائم <em>المختارة</em></h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-card">
+      <img class="card-img" src="https://salmas-feast-bloom.lovable.app/assets/biryani-box-D4jgHWsZ.jpg" alt="Biryani Box">
+      <div class="card-body">
+        <span class="card-badge">✦ الأكثر طلباً</span>
+        <h3 class="card-title">The Royal Biryani Box</h3>
+        <p class="card-desc">أرز بسمتي بالزعفران مع لحم طري مطهو ببطء، بصل مقلي وبهارات دافئة — ملكي بكل معنى الكلمة.</p>
+        <div class="card-footer">
+          <div class="price"><span>JOD</span>5</div>
+          <a href="https://wa.me/962792249666" class="card-btn">اطلب الآن</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <img class="card-img" src="https://salmas-feast-bloom.lovable.app/assets/savories-box-CLmQ3MIy.jpg" alt="Savories Box">
+      <div class="card-body">
+        <span class="card-badge">✦ مثالي للتجمعات</span>
+        <h3 class="card-title">Crispy Savories Box</h3>
+        <p class="card-desc">سمبوسك وسمبوسة ولفائف ذهبية محشوّة، تُقدَّم مع صلصات حامضة — لا تُقاوَم في كل لقمة.</p>
+        <div class="card-footer">
+          <div class="price"><span>JOD</span>10</div>
+          <a href="https://wa.me/962792249666" class="card-btn">اطلب الآن</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <img class="card-img" src="https://salmas-feast-bloom.lovable.app/assets/dolma-box-Bl_sxbBx.jpg" alt="Dolma Feast">
+      <div class="card-body">
+        <span class="card-badge">✦ طبق التراث</span>
+        <h3 class="card-title">Traditional Dolma Feast</h3>
+        <p class="card-desc">أوراق عنب وخضار موسمية محشوّة، مطهوّة على نار هادئة بزيت الزيتون ودبس الرمان — أصالة لا مثيل لها.</p>
+        <div class="card-footer">
+          <div class="price"><span>JOD</span>7</div>
+          <a href="https://wa.me/962792249666" class="card-btn">اطلب الآن</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Box -->
+  <div class="custom-box">
+    <div>
+      <h3>صمّم وليمتك الخاصة ✦</h3>
+      <p>أخبرنا بعدد ضيوفك وتفضيلاتك — وسنبني لك وليمة مميزة تناسب مائدتك تماماً.</p>
+    </div>
+    <div class="custom-form">
+      <div class="form-row">
+        <div class="guests-control">
+          <span class="guests-label">عدد الضيوف</span>
+          <button onclick="changeGuests(-1)">−</button>
+          <span class="guests-num" id="guestNum">8</span>
+          <button onclick="changeGuests(1)">+</button>
+        </div>
+      </div>
+      <div class="pref-grid" id="prefGrid">
+        <button class="pref-btn active" onclick="selectPref(this)">مشكّل</button>
+        <button class="pref-btn" onclick="selectPref(this)">لحوم</button>
+        <button class="pref-btn" onclick="selectPref(this)">نباتي</button>
+        <button class="pref-btn" onclick="selectPref(this)">مأكولات بحرية</button>
+      </div>
+      <a id="waBtn" href="https://wa.me/962792249666?text=أريد%20وليمة%20مخصصة%20لـ%208%20أشخاص%20-%20تفضيل:%20مشكّل" class="btn-primary" style="text-align:center;">
+        اطلب عبر واتساب
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-tag">✦ تواصل معنا ✦</span>
+    <h2 class="section-title">نحن <em>هنا</em> لك</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-options">
+    <a href="tel:0792249666" class="contact-card">
+      <span class="contact-icon">📞</span>
+      <span class="contact-label">هاتف</span>
+      <span class="contact-value">0792249666</span>
+    </a>
+    <a href="https://wa.me/962792249666" class="contact-card">
+      <span class="contact-icon">💬</span>
+      <span class="contact-label">واتساب</span>
+      <span class="contact-value">اضغط للمحادثة</span>
+    </a>
+    <a href="https://instagram.com" class="contact-card">
+      <span class="contact-icon">📸</span>
+      <span class="contact-label">إنستغرام</span>
+      <span class="contact-value">@salma.khanom</span>
+    </a>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <span class="footer-copy">© 2026 Salma Khanom — Authentic South Asian Catering</span>
+  <a href="#home" class="footer-logo">SALMA KHANOM</a>
+</footer>
+
+<script>
+  // Sticky navbar effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Guests counter
+  let guests = 8;
+  function changeGuests(delta) {
+    guests = Math.max(2, Math.min(100, guests + delta));
+    document.getElementById('guestNum').textContent = guests;
+    updateWALink();
+  }
+
+  // Preference selection
+  let selectedPref = 'مشكّل';
+  function selectPref(btn) {
+    document.querySelectorAll('.pref-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedPref = btn.textContent.trim();
+    updateWALink();
+  }
+
+  function updateWALink() {
+    const msg = encodeURIComponent(`أريد وليمة مخصصة لـ ${guests} أشخاص - تفضيل: ${selectedPref}`);
+    document.getElementById('waBtn').href = `https://wa.me/962792249666?text=${msg}`;
+  }
+</script>
+</body>
+</html> 
